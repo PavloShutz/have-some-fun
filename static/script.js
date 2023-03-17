@@ -28,12 +28,17 @@ function changeActivityContent(request) {
 	document.getElementById('link').innerHTML = `Link: ${(link !== '') ? `<a href=${link} target=_blank>${link}</a>` : 'No link was provided'}`;
 }
 
-function sendRequestToGetFormData(page, formId) {
-	const form = document.getElementById(formId);
-	const formData = new FormData(form);
-	fetch(`http://127.0.0.1:5500/${page}`, {
-		"method": "POST",
-		"headers": {"Content-Type": "application/json"},
-    "body": JSON.stringify(formData),
+const formEl = document.querySelector('.reg');
+
+formEl.addEventListener('submit', event => {
+	event.preventDefault();
+	const formData = new FormData(formEl);
+	const data = Object.fromEntries(formData);
+	fetch('http://127.0.0.1:5500/register', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(data)
 	});
-}
+})
