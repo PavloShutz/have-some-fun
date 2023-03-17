@@ -8,6 +8,7 @@ passlib = "*"
 flask-jwt-extended = "*"
 flask = "*"
 sqlalchemy = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

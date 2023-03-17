@@ -1,11 +1,16 @@
 from flask import Flask, render_template, request
+from flask_jwt_extended import JWTManager, jwt_required
+
+from config import Config
 
 app = Flask(__name__)
+app.config.from_object(Config)
 
-app.secret_key = 'secret'
+jwt = JWTManager(app)
 
 @app.route('/')
 @app.route('/index')
+@jwt_required()
 def index():
 	return render_template('index.html')
 
