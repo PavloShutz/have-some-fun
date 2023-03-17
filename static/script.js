@@ -25,5 +25,5 @@ function changeActivityContent(request) {
 	document.getElementById('type').innerHTML = `Type: <b>${JSON.parse(request.response).type}</b>`;
 	document.getElementById('price').innerHTML = `Price: <b>${JSON.parse(request.response).price}</b>`;
 	const link = JSON.parse(request.response).link
-	document.getElementById('link').innerHTML = `Link: <b>${(link !== '') ? link : 'No link was provided'}</b>`;
+	document.getElementById('link').innerHTML = `Link: ${(link !== '') ? `<a href=${link} target=_blank>${link}</a>` : 'No link was provided'}`;
 }
