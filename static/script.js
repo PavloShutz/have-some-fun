@@ -24,6 +24,16 @@ function changeActivityContent(request) {
 	document.getElementById('accessibility').innerHTML = `Accessibility: <b>${JSON.parse(request.response).accessibility}</b>`;
 	document.getElementById('type').innerHTML = `Type: <b>${JSON.parse(request.response).type}</b>`;
 	document.getElementById('price').innerHTML = `Price: <b>${JSON.parse(request.response).price}</b>`;
-	const link = JSON.parse(request.response).link
+	const link = JSON.parse(request.response).link;
 	document.getElementById('link').innerHTML = `Link: ${(link !== '') ? `<a href=${link} target=_blank>${link}</a>` : 'No link was provided'}`;
+}
+
+function sendRequestToGetFormData(page, formId) {
+	const form = document.getElementById(formId);
+	const formData = new FormData(form);
+	fetch(`http://127.0.0.1:5500/${page}`, {
+		"method": "POST",
+		"headers": {"Content-Type": "application/json"},
+    "body": JSON.stringify(formData),
+	});
 }
