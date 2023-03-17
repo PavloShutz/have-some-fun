@@ -7,7 +7,6 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 engine = create_engine('sqlite:///storage.db', echo=True)
 
-
 class Base(DeclarativeBase):
     pass
 
