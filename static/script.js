@@ -1,20 +1,25 @@
 function getRandomActivity() {
-	let request = new XMLHttpRequest();
-	request.open("GET", "http://www.boredapi.com/api/activity/");
-	request.send();
+	const request = sendRequestToGetActivity();
 	request.onload = () => {
 		console.log(request);
 		if (request.status === 200){
 			console.log(JSON.parse(request.response));
 			document.getElementById('activity').innerHTML = `Activity: ${JSON.parse(request.response).activity}`;
-			document.getElementById('accessibility').innerHTML = `Accessibility: ${JSON.parse(request.response).accessibility}`;
-			document.getElementById('type').innerHTML = `Type: ${JSON.parse(request.response).type}`;
-			document.getElementById('price').innerHTML = `Price: ${JSON.parse(request.response).price}`;
+			document.getElementById('accessibility').innerHTML = `Accessibility: <b>${JSON.parse(request.response).accessibility}</b>`;
+			document.getElementById('type').innerHTML = `Type: <b>${JSON.parse(request.response).type}</b>`;
+			document.getElementById('price').innerHTML = `Price: <b>${JSON.parse(request.response).price}</b>`;
 			const link = JSON.parse(request.response).link
-			document.getElementById('link').innerHTML = `Link: ${(link !== '') ? link : 'No link was provided'}`;
+			document.getElementById('link').innerHTML = `Link: <b>${(link !== '') ? link : 'No link was provided'}</b>`;
 		}
 		else {
 			console.log(`error ${request.status} ${request.statusText}`)
 		}
 	}
+}
+
+function sendRequestToGetActivity() {
+	let request = new XMLHttpRequest();
+	request.open("GET", "http://www.boredapi.com/api/activity/");
+	request.send();
+	return request;
 }
